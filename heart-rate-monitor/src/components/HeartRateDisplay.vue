@@ -72,6 +72,7 @@ h1 {
 }
 
 button {
+  font-weight: 600;
   padding: 10px 10px;
   background-color: #385e3c;
   color: #fefff1;
