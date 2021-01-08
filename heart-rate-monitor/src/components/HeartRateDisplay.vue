@@ -20,19 +20,26 @@ export default {
   methods: {
 
     async requestBluetoothConnection() {
-      const device = await navigator.bluetooth.requestDevice({
+      try{
+        const device = await navigator.bluetooth.requestDevice({
         filters: [{
           name: "Versa Lite",
         }], 
         optionalServices: ["heart_rate"],
         }); 
-      this.device = device; 
-      const server = await device.gatt.connect();
-      if(server){
-        this.isDeviceConnected = true;
-        this.server = server;
-        this.getHeartRate(server); 
-      } 
+        this.device = device; 
+        const server = await device.gatt.connect();
+        if(server){
+          this.isDeviceConnected = true;
+          this.server = server;
+          this.getHeartRate(server); 
+        }
+
+      }
+      catch(error){
+        console.warn(error);
+      }
+       
     }, 
 
     async getHeartRate(server){
